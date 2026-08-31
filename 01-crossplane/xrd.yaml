@@ -12,20 +12,33 @@
 #   - Usar el grupo database.poc.io/v1alpha1
 # =====================================================================
 
-# apiVersion: apiextensions.crossplane.io/v1
-# kind: CompositeResourceDefinition
-# metadata:
-#   name: ...
+apiVersion: apiextensions.crossplane.io/v2
+kind: CompositeResourceDefinition
+metadata:
+  name: postgresqlinstances.database.poc.io
 #   annotations:
 #     argocd.argoproj.io/sync-wave: "1"
-# spec:
-#   group: ...
-#   names:
-#     kind: ...
-#   versions:
-#     - name: v1alpha1
-#       served: true
-#       referenceable: true
-#       schema:
-#         openAPIV3Schema:
-#           ...
+spec:
+  group: database.poc.io
+  scope: Cluster
+  names:
+    kind: XPostgreSQLInstance
+    plural: postgresqlinstances
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                dbName:
+                  type: string
+                owner:
+                  type: string
+              required:
+                - dbName
+

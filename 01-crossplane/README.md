@@ -9,7 +9,7 @@ La idea central es poderosa: **el plano de control de Kubernetes se convierte en
 ### Conceptos clave que debes dominar:
 
 | Concepto | Descripción |
-|---|---|---|
+| --- | --- |
 | **Provider** | Plugin que sabe cómo hablar con un sistema externo (AWS, GCP, PostgreSQL) |
 | **Managed Resource (MR)** | Representación 1:1 de un recurso externo en Kubernetes |
 | **Composite Resource (XR)** | Agrupación de Managed Resources que forman una unidad lógica |
