@@ -9,5 +9,5 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
-  dbName: mi-bd
+  dbName: mi-nueva-bd
   owner: postgres
