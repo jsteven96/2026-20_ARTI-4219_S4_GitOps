@@ -10,4 +10,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   dbName: mi-bd
-  owner: jsteven96
+  owner: postgres

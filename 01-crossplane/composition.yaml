@@ -32,3 +32,6 @@ spec:
         - type: FromCompositeFieldPath
           fromFieldPath: "spec.dbName"
           toFieldPath: "spec.forProvider.name"
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.owner"
+          toFieldPath: "spec.forProvider.owner"

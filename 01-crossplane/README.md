@@ -189,6 +189,10 @@ kubectl apply -f 01-crossplane/xrd.yaml
 kubectl get xrd
 ```
 
+Evidencia de aplicado y registro del XRD
+
+![Registro del XRD](images/image1.png)
+
 ---
 
 ### TODO 3: Construir la Composition
@@ -215,6 +219,9 @@ kubectl apply -f 01-crossplane/composition.yaml
 # Verificar que la Composition fue registrada
 kubectl get compositions
 ```
+Evidencia del registro de la composición
+
+![Registro de la composición](images/image2.png)
 
 ---
 
@@ -240,6 +247,12 @@ kubectl describe postgresqlinstance <nombre> -n default
 # Ver los eventos de Crossplane
 kubectl get events -n crossplane-system --sort-by='.lastTimestamp'
 ```
+
+Evidencia de la aplicación del claim y de la reconciliación.
+
+![Registro del claim](images/image3.png)
+
+![Registro de los eventos](images/image4.png)
 
 ---
 
