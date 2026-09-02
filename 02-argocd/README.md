@@ -33,11 +33,15 @@ helm install argocd argo/argo-cd \
 
 ```
 
+![Instalación de Argo](images/image5.png)
+
 ```bash
 # Observar la creación de pods en tiempo real
 kubectl get pods -n argocd --watch
 ```
 **Espera hasta que TODOS los pods estén `Running`**
+
+![Creación de pods](images/image6.png)
 
 ### Paso 2: Verificar los CRDs de Argo CD
 
@@ -52,6 +56,8 @@ applications.argoproj.io
 applicationsets.argoproj.io
 appprojects.argoproj.io
 ```
+
+![Verificación de CRDs](images/image7.png)
 
 ---
 
@@ -85,6 +91,8 @@ Abre tu navegador en: **https://localhost:8080**
 **Credenciales:**
 - Usuario: `admin`
 - Contraseña: (la que obtuviste en el paso anterior)
+
+![Acceso al frontend de ArgoCD](images/image8.png)
 
 ### Paso 4: Instalar el CLI de Argo CD
 
@@ -161,6 +169,9 @@ argocd repo list
 
 En la UI: **Settings → Repositories** → verifica que el estado sea `Successful`.
 
+![Login desde CLI](images/image9.png)
+![Adición de repositorio](images/image10.png)
+
 ---
 
 ## 2.6 Crear la Application de Argo CD
@@ -178,6 +189,8 @@ git push origin main
 # Aplicar el manifiesto directamente al clúster
 kubectl apply -f 02-argocd/app-gitops-demo.yaml
 ```
+
+![Creación de aplicación](images/image11.png)
 
 ---
 
@@ -203,6 +216,11 @@ kubectl get databases.postgresql.postgresql.upbound.io
 PGPASSWORD=platform123 psql -h localhost -U postgres -c "\l"
 # Deberías ver 'appdb' en la lista
 ```
+
+![Reconciliación](images/image12.png)
+![Reconciliación](images/image13.png)
+![Reconciliación](images/image14.png)
+![Reconciliación](images/image15.png)
 
 ---
 
@@ -231,6 +249,9 @@ argocd app sync crossplane-infra
 argocd app get crossplane-infra
 kubectl get databases.postgresql.postgresql.upbound.io
 ```
+
+![Ciclo completo](images/image16.png)
+![Ciclo completo](images/image17.png)
 
 ---
 
