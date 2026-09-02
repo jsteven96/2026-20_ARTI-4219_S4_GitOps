@@ -24,6 +24,8 @@ git commit -m "feat: rename database from appdb to appdb-v2"
 git push origin main
 ```
 
+![Modificacion](images/image1.png)
+
 > **Tiempo esperado:** Argo CD hace polling cada 3 minutos por defecto. Si tienes webhooks configurados, el cambio se detecta en segundos.
 
 ### Forzar sincronización inmediata (para la demo)
@@ -42,6 +44,9 @@ kubectl get xpostgresqlinstances -n default -o yaml | grep dbName
 # Ver el historial de despliegues
 argocd app history gitops-demo
 ```
+![Verificacion](images/image2.png)
+
+![Historial](images/image3.png)
 
 ---
 
@@ -57,14 +62,14 @@ Simula que alguien modificó el Claim directamente en el clúster (lo que en Git
 # Cambiar el dbName DIRECTAMENTE en el clúster (sin pasar por Git)
 kubectl patch xpostgresqlinstance mi-base-de-datos -n default \
   --type='merge' \
-  -p '{"spec":{"parameters":{"dbName":"appdb-hacked"}}}'
+  -p '{"spec":{"dbName":"appdb-hacked"}}'
 ```
 
 ### Observar la auto-corrección
 
 ```bash
 # Observar en tiempo real
-watch -n 2 "kubectl get postgresqlinstance -n default -o jsonpath='{.items[0].spec.parameters.dbName}'"
+watch -n 2 "kubectl get xpostgresqlinstance -n default -o jsonpath='{spec.dbName}'"
 ```
 
 Argo CD detectará el drift y **automáticamente revertirá** al estado definido en Git.
@@ -74,7 +79,8 @@ Argo CD detectará el drift y **automáticamente revertirá** al estado definido
 ### Verificar la restauración
 
 ```bash
-kubectl get postgresqlinstance -n default \
-  -o jsonpath='{.items[0].spec.parameters.dbName}'
+kubectl get xpostgresqlinstance -o jsonpath='{.items[0].spec.dbName}'; echo
 # Debe volver a: appdb-v2
 ```
+
+![Forzado](images/image4.png)
